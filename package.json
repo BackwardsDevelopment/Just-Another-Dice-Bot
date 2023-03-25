@@ -1,0 +1,35 @@
+{
+  "name": "jadb",
+  "version": "4.0.0",
+  "description": "Just Another Dice Bot",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "nodemon ./src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BackwardsUser/Just-Another-Dice-Bot.git"
+  },
+  "keywords": [
+    "Discord",
+    "Bot",
+    "Dice",
+    "JADB",
+    "DND",
+    "Util"
+  ],
+  "author": "Backwards",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BackwardsUser/Just-Another-Dice-Bot/issues"
+  },
+  "homepage": "https://github.com/BackwardsUser/Just-Another-Dice-Bot#readme",
+  "dependencies": {
+    "discord.js": "^14.8.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
