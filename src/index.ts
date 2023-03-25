@@ -41,6 +41,8 @@ client.on(Events.MessageCreate, (message: Message) => {
     let output: string = `**You rolled: \`${ranNums.sort((a,b)=>a-b)}\`. Total: \`${netTotal}\`.**`;
     if (message.content.includes("+")) output += ` **Total with modifier: \`${netTotal + parseInt(values[1], 10)}\`**`;
     if (message.content.includes("+")) output += ` **Total with modifier: \`${netTotal - parseInt(values[1], 10)}\`**`;
+    if (message.content.includes("*")) output += ` **Total with modifier: \`${netTotal * parseInt(values[1], 10)}\`**`;
+    if (message.content.includes("/")) output += ` **Total with modifier: \`${netTotal / parseInt(values[1], 10)}\`**`;
     message.reply(output); 
 });
 
