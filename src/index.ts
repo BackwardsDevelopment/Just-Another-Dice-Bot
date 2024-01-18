@@ -2,7 +2,7 @@ import { Client, GatewayIntentBits, Events, Message, ChannelType } from 'discord
 
 const token: string = "your-token";
 
-const newIntents: GatewayIntentBits[] = [
+const newIntents: GatewayIntentBits[] = [   
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.Guilds,
     GatewayIntentBits.MessageContent
@@ -40,7 +40,7 @@ client.on(Events.MessageCreate, (message: Message) => {
     let netTotal: number = sumOf(ranNums);
     let output: string = `**You rolled: \`${ranNums.sort((a,b)=>a-b)}\`. Total: \`${netTotal}\`.**`;
     if (message.content.includes("+")) output += ` **Total with modifier: \`${netTotal + parseInt(values[1], 10)}\`**`;
-    if (message.content.includes("+")) output += ` **Total with modifier: \`${netTotal - parseInt(values[1], 10)}\`**`;
+    if (message.content.includes("-")) output += ` **Total with modifier: \`${netTotal - parseInt(values[1], 10)}\`**`;
     if (message.content.includes("*")) output += ` **Total with modifier: \`${netTotal * parseInt(values[1], 10)}\`**`;
     if (message.content.includes("/")) output += ` **Total with modifier: \`${netTotal / parseInt(values[1], 10)}\`**`;
     message.reply(output); 
