@@ -1,6 +1,6 @@
 {
   "name": "jadb",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Just Another Dice Bot",
   "main": "src/index.js",
   "scripts": {
