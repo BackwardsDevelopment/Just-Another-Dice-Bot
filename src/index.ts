@@ -35,7 +35,6 @@ client.on(Events.MessageCreate, async (message: Message) => {
         return;
     }
 
-    console.log(message.channelId);
     if (!await client.isChannel(message.channelId)) {
         console.log("not a channel");
         return;
