@@ -52,9 +52,19 @@ client.on(Events.MessageCreate, async (message: Message) => {
     let modifiers = "";
 
     if (dice_stats[1] !== undefined) {
+
+        if (dice_stats[1].includes(".")) {
+            message.reply("Cannot use decimal values");
+            return;
+        }
+
         quantity = parseInt(dice_stats[1] || "");
         if (quantity < 0)
             quantity = 0
+    }
+    if (dice_stats[2]?.includes(".")) {
+        message.reply("Cannot use decimal values");
+        return;
     }
     size = parseInt(dice_stats[2] || "");
     if (size < 1)
