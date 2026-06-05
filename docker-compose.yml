@@ -1,0 +1,10 @@
+version: "3.9"
+
+service:
+  discord-bot:
+    build: .
+    container_name: dice-bot
+    restart: unless-stopped
+    tty: true
+    environment:
+      - TOKEN=${TOKEN}
