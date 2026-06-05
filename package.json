@@ -3,6 +3,7 @@
   "version": "4.0.1",
   "description": "Just Another Dice Bot",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
     "test": "nodemon ./src/index.ts"
   },
@@ -25,11 +26,19 @@
   },
   "homepage": "https://github.com/BackwardsUser/Just-Another-Dice-Bot#readme",
   "dependencies": {
-    "discord.js": "^14.8.0",
+    "discord.js": "^14.26.4",
+    "dotenv": "^17.4.2",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^6.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2"
   },
   "devDependencies": {
+    "@types/node": "^25.9.1",
     "nodemon": "^3.0.3"
+  },
+  "allowScripts": {
+    "sqlite3@6.0.1": true,
+    "sqlite@5.1.1": true
   }
 }
