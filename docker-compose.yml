@@ -1,6 +1,6 @@
 version: "3.9"
 
-service:
+services:
   discord-bot:
     build: .
     container_name: dice-bot
