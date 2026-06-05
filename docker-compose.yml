@@ -7,6 +7,6 @@ services:
     restart: unless-stopped
     tty: true
     volumes:
-      - /srv/dice-bot/settings.db:/app/settings.db
+      - /srv/dice-bot/data:/app/data/
     environment:
       - TOKEN=${TOKEN}

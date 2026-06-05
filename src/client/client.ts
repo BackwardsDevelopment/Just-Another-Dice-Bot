@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { existsSync, writeFileSync } from "node:fs";
 
 const Database = sqlite3.Database;
-const db_file = join(__dirname, "..", "..", "settings.db");
+const db_file = join(__dirname, "..", "..", "data", "settings.db");
 
 export class ExtendedClient extends Client {
 
