@@ -71,6 +71,10 @@ client.on(Events.MessageCreate, async (message: Message) => {
     out += `Sum: \`${rolls.reduce((accumulator: number, current: number) => accumulator + current, 0)}\``;
     if (modifiers)
         out += `\nSum (M): \`${evalModifiers(rolls.reduce((accumulator: number, current: number) => accumulator + current, 0), modifiers)}\``;
+    if (out.length > 4000) {
+        message.reply("Invalid response: Response too long. Too many dice?");
+        return;
+    }
     message.reply({ content: out });
 });
 
