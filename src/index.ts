@@ -65,7 +65,7 @@ client.on(Events.MessageCreate, async (message: Message) => {
 
     const rolls = [];
     for (let i = 0; i < quantity; i++) {
-        rolls.push(randInt(size));
+        rolls.push(randInt(size) + 1);
     }
     let out = "";
     out += `Rolled ${quantity} d${size}${quantity > 1 ? "s" : ""}\n`;
