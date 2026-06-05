@@ -11,6 +11,7 @@ const intents: GatewayIntentBits[] = [
 ];
 
 const client = new ExtendedClient({ intents });
+const max_content_len = 2000;
 
 client.once(Events.ClientReady, (c: Client) => {
     console.log(`Successfully logged in as ${client.user?.username}`);
@@ -75,7 +76,7 @@ client.on(Events.MessageCreate, async (message: Message) => {
     out += `Sum: \`${rolls.reduce((accumulator: number, current: number) => accumulator + current, 0)}\``;
     if (modifiers)
         out += `\nSum (M): \`${evalModifiers(rolls.reduce((accumulator: number, current: number) => accumulator + current, 0), modifiers)}\``;
-    if (out.length > 4000) {
+    if (out.length > max_content_len) {
         message.reply("Invalid response: Response too long. Too many dice?");
         return;
     }
