@@ -16,7 +16,7 @@ client.once(Events.ClientReady, (c: Client) => {
     console.log(`Successfully logged in as ${client.user?.username}`);
 });
 
-const rollRegex = /([0-9])?d([0-9]+)(.*)/i
+const rollRegex = /([0-9]*)?d([0-9]*)(.*)/i;
 
 client.on(Events.MessageCreate, async (message: Message) => {
 
