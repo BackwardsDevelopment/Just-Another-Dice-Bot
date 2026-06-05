@@ -53,8 +53,12 @@ client.on(Events.MessageCreate, async (message: Message) => {
 
     if (dice_stats[1] !== undefined) {
         quantity = parseInt(dice_stats[1] || "");
+        if (quantity < 0)
+            quantity = 0
     }
     size = parseInt(dice_stats[2] || "");
+    if (size < 1)
+        size = 1
     if (dice_stats[3] !== undefined) {
         modifiers = dice_stats[3];
     }
