@@ -1,5 +1,30 @@
 # Just Another Dice Bot
+  
+Another rewrite of my Dice rolling Discord Bot.  
+  
+No longer uses hardcoded channel names, instead:
+`;setrollchannel` - Can be used to designate a rolls channel
+`;delrollchannel` - Can be used to remove a roll channel designation  
+  
+In a designated rolls channel, using the standard roll notation you can specify a roll to make:
+`<quantity>d<dice size><modifier>`  
+ex: 
+`4d20`  
+`2d8+4`  
+`d4-6`  
+  
+Considering it's just a RNG, this allows for non-standard dice sizes:  
+`d5`  
+`d17`  
+`d200`  
+etc.  
+  
+Designated roll channels are saved in a sqlite database.  
+One doesn't need to be made, if it doesn't already exist, one will automatically be made.  
 
-Just a simple Dice bot... it looks for channel names that contain "roll" or "doom" in them, then it will look for input that contains the letter "D" (non case sensitive) followed by a number of any kind. Afterwards it will roll with standard D&D formatting, (2d4+4 = roll 2: 4 sided dice), than add 4 to the sum.
+Set token in ENV Variables:
+`TOKEN="<your token>"`
 
-This bot doesn't use standard commands such as !dice etc. It will just look for an input such as d4, 6d8, 2d8+3, 4d4-6, etc.
+## Contributing
+Feel free to make a PR if you have something you want to change, update, modify, etc.  
+MIT License  

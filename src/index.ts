@@ -1,49 +1,77 @@
-import { Client, GatewayIntentBits, Events, Message, ChannelType } from 'discord.js';
+import { config as envConfig } from "dotenv";
+import { Client, Events, GatewayIntentBits, Message } from "discord.js";
+import { ExtendedClient } from "./client/client.ts";
+import { evalModifiers, randInt } from "./lib/helpers.ts";
+envConfig();
 
-const token: string = "your-token";
-
-const newIntents: GatewayIntentBits[] = [   
+const intents: GatewayIntentBits[] = [
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.Guilds,
     GatewayIntentBits.MessageContent
 ];
 
-const client: Client = new Client({
-    intents: newIntents
+const client = new ExtendedClient({ intents });
+
+client.once(Events.ClientReady, (c: Client) => {
+    console.log(`Successfully logged in as ${client.user?.username}`);
 });
 
-client.on(Events.ClientReady, () => {
-    console.log(`Successfully Logged in as ${client.user?.tag}!`);
-});
+const rollRegex = /([0-9])?d([0-9]+)(.*)/i
 
-function sumOf(input: number[]): number {
-    let total: number = 0;
-    input.forEach(num => total+=num);
-    return total;
-}
+client.on(Events.MessageCreate, async (message: Message) => {
 
-const commandRegEx: RegExp = /(([0-9]+d)|(d))+[0-9]/i;
-client.on(Events.MessageCreate, (message: Message) => {
-    if (!commandRegEx.test(message.content)) return;
-    if (message.channel.type != ChannelType.GuildText) return;
-    if (!message.channel.name.toLowerCase().includes("roll")) return;
-    
-    const values:string[] = message.content.toLowerCase().split("d").join("./").split(/\+|\-/).join("./").split("./");
-    if (values[0] == "") values[0] = "1";
+    if (message.author.bot)
+        return;
 
-    let ranNums: number[] = [];
-    for (var i: number = 0; i < parseInt(values[0], 10); i++) {
-        const ran: number = Math.floor(Math.random() * parseInt(values[1], 10));
-        ranNums.push(ran+1);
+    if (message.content === ";setrollchannel") {
+        await client.saveChannel(message.channelId);
+        message.reply("Set this channel as a rolls channel.");
+        return;
+    }
+    if (message.content === ";delrollchannel") {
+        await client.removeChannel(message.channelId);
+        message.reply("Remove this channel as a rolls channel");
+        return;
     }
 
-    let netTotal: number = sumOf(ranNums);
-    let output: string = `**You rolled: \`${ranNums.sort((a,b)=>a-b)}\`. Total: \`${netTotal}\`.**`;
-    if (message.content.includes("+")) output += ` **Total with modifier: \`${netTotal + parseInt(values[1], 10)}\`**`;
-    if (message.content.includes("-")) output += ` **Total with modifier: \`${netTotal - parseInt(values[1], 10)}\`**`;
-    if (message.content.includes("*")) output += ` **Total with modifier: \`${netTotal * parseInt(values[1], 10)}\`**`;
-    if (message.content.includes("/")) output += ` **Total with modifier: \`${netTotal / parseInt(values[1], 10)}\`**`;
-    message.reply(output); 
+    console.log(message.channelId);
+    if (!await client.isChannel(message.channelId)) {
+        console.log("not a channel");
+        return;
+    }
+
+    const content = message.content;
+
+    const dice_stats = content.match(rollRegex);
+
+    if (dice_stats == null)
+        return;
+
+    let quantity = 1;
+    let size = 0;
+    let modifiers = "";
+
+    if (dice_stats[1] !== undefined) {
+        quantity = parseInt(dice_stats[1] || "");
+    }
+    size = parseInt(dice_stats[2] || "");
+    if (dice_stats[3] !== undefined) {
+        modifiers = dice_stats[3];
+    }
+
+    const rolls = [];
+    for (let i = 0; i < quantity; i++) {
+        rolls.push(randInt(size));
+    }
+    let out = "";
+    out += `Rolled ${quantity} d${size}${quantity > 1 ? "s" : ""}\n`;
+    out += rolls.map(roll => `\`${roll}\``).join(" ") + "\n";
+    if (modifiers)
+        out += "M: " + rolls.map(roll => `\`${evalModifiers(roll, modifiers)}\``).join(" ") + "\n";
+    out += `Sum: \`${rolls.reduce((accumulator: number, current: number) => accumulator + current, 0)}\``;
+    if (modifiers)
+        out += `\nSum (M): \`${evalModifiers(rolls.reduce((accumulator: number, current: number) => accumulator + current, 0), modifiers)}\``;
+    message.reply({ content: out });
 });
 
-client.login(token);
+client.login(process.env.TOKEN);
