@@ -6,5 +6,7 @@ services:
     container_name: dice-bot
     restart: unless-stopped
     tty: true
+    volumes:
+      - /srv/dice-bot/settings.db:/app/settings.db
     environment:
       - TOKEN=${TOKEN}
