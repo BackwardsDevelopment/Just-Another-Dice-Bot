@@ -17,7 +17,7 @@ client.once(Events.ClientReady, (c: Client) => {
     console.log(`Successfully logged in as ${client.user?.username}`);
 });
 
-const rollRegex = /([0-9]*)?d([0-9]*)(.*)/i;
+const rollRegex = /([0-9]*)?d([0-9]+)(.*)/i;
 
 client.on(Events.MessageCreate, async (message: Message) => {
 
@@ -63,6 +63,16 @@ client.on(Events.MessageCreate, async (message: Message) => {
             quantity = 0
     }
     size = parseInt(dice_stats[2] || "");
+
+    if (isNaN(quantity)) {
+        message.reply("Invalid Quantity passed");
+        return;
+    }
+    if (isNaN(size)) {
+        message.reply("Invalid Dice Size passed");
+        return;
+    }
+
     if (size < 1)
         size = 1
     if (dice_stats[3] !== undefined) {
