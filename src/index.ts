@@ -1,7 +1,7 @@
 import { config as envConfig } from "dotenv";
 import { Client, Events, GatewayIntentBits, Message } from "discord.js";
-import { ExtendedClient } from "./client/client";
-import { evalModifiers, randInt } from "./lib/helpers";
+import { ExtendedClient } from "./client/client.js";
+import { evalModifiers, randInt } from "./lib/helpers.js";
 envConfig();
 
 const intents: GatewayIntentBits[] = [

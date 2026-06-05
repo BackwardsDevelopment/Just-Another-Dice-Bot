@@ -4,7 +4,7 @@
   "description": "Just Another Dice Bot",
   "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon ./src/index.ts",
+    "dev": "nodemon --exec tsx src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js"
   },
@@ -36,10 +36,12 @@
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.0.3",
+    "tsx": "^4.22.4"
   },
   "allowScripts": {
     "sqlite3@6.0.1": true,
-    "sqlite@5.1.1": true
+    "sqlite@5.1.1": true,
+    "esbuild@0.28.0": true
   }
 }
