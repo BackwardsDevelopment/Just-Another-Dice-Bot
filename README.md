@@ -2,11 +2,11 @@
   
 Another rewrite of my Dice rolling Discord Bot.  
   
-No longer uses hardcoded channel names, instead:
-`;setrollchannel` - Can be used to designate a rolls channel
+No longer uses hardcoded channel names, instead:  
+`;setrollchannel` - Can be used to designate a rolls channel  
 `;delrollchannel` - Can be used to remove a roll channel designation  
   
-In a designated rolls channel, using the standard roll notation you can specify a roll to make:
+In a designated rolls channel, using the standard roll notation you can specify a roll to make:  
 `<quantity>d<dice size><modifier>`  
 ex: 
 `4d20`  
