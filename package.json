@@ -3,7 +3,6 @@
   "version": "5.0.0",
   "description": "Just Another Dice Bot",
   "main": "src/index.js",
-  "type": "module",
   "scripts": {
     "dev": "nodemon ./src/index.ts",
     "build": "tsc",
